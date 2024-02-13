@@ -1,5 +1,8 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+
+import './style.scss';
+
 import UndraftedContainer from './undrafted/undraftedContainer.jsx';
 import MyTeamContainer from './myTeam/myTeamContainer.jsx';
 import OverviewContainer from './myTeam/overviewContainer.jsx';

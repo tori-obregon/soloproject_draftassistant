@@ -21,6 +21,17 @@ module.exports = {
                     }
                 }
             },
+            { //this second object is a rule for transpiling css/scss
+                test: /\.s[ac]ss$/i,
+                use:  [
+                    // Creates `style` nodes from JS strings
+                    "style-loader",
+                    // Translates CSS into CommonJS
+                    "css-loader",
+                    // Compiles Sass to CSS
+                    "sass-loader",
+                ], 
+            }
         ],
     },
     plugins: [
@@ -28,9 +39,9 @@ module.exports = {
             template: './src/index.html',
             filename: './index.html',
           }),
-          new CopyPlugin({
-            patterns: [{ from: './src/style.css' }],
-          }),
+        //   new CopyPlugin({
+        //     patterns: [{ from: './src/style.css' }],
+        //   }),
     ],
     devServer: {
         static: {

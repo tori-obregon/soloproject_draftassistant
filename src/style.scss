@@ -1,3 +1,53 @@
+body {
+    background-color: azure;
+}
+
 #app {
-   background-color: lightgray; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    border: 2px solid black;
+    padding: 3%;
+}
+
+#overviewContainer {
+    display: flex;
+
+    border: 2px solid black;
+    padding: 0 3%;
+    margin: 2% 0;
+}
+
+#myTeamContainer {
+    border: 2px solid black;
+    padding: 0 3%;
+    margin: 2% 0;
+}
+
+#myPlayer {
+    border: 2px dashed grey;
+    padding: 0 3%;
+    margin: 2% 0;
+}
+
+#undraftedContainer {
+    border: 2px solid black;
+    padding: 0 3%;
+    margin: 2% 0;
+}
+
+#undraftedPlayer {
+    border: 2px dashed grey;
+    padding: 0 3%;
+    margin: 2% 0;
+}
+
+#playerSelectionPopUp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid black;
+    padding: 0 3%;
+    margin: 2% 0;
 }

@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function UndraftedPlayer() {
   return (
-    <div>undraftedPlayer
+    <div id='undraftedPlayer'>undraftedPlayer
     <button>SELECT</button>
     <button>TAKEN</button>
     </div>

@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function PlayerSelectionPopUp() {
   return (
-    <div>
+    <div id='playerSelectionPopUp'>
         <h1>PlayerSelectionPopUp</h1>
         <button>X</button> 
         <h3>[playerName]</h3>
