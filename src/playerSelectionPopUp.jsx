@@ -1,10 +1,16 @@
 import React from 'react'
 
+function closePopUp() {
+//TODO: functionality to close the popup
+  //somehow change visibility in CSS to hidden
+}
+
+
 export default function PlayerSelectionPopUp() {
   return (
     <div id='playerSelectionPopUp'>
         <h1>PlayerSelectionPopUp</h1>
-        <button>X</button> 
+        <button id='closePopUpBtn'>X</button> 
         <h3>[playerName]</h3>
         <label>How much did you pay?</label>
         <input type='text' placeholder='$1'></input>
