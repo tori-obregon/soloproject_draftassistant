@@ -44,8 +44,24 @@ module.exports = {
         //   }),
     ],
     devServer: {
+        host: 'localhost',
+        port: 8080,
+         // enable HMR on the devServer
+        hot: true,
+        // fallback to root for other urls
+        historyApiFallback: true,
         static: {
             directory: path.join(__dirname, './dist'),
         },
+        proxy: {
+            '/api/**': {
+              target: 'http://localhost:3000/',
+              secure: false,
+            },
+            // '/assets/**': {
+            //   target: 'http://localhost:3000/',
+            //   secure: false,
+            // },
+          },
     },
 };

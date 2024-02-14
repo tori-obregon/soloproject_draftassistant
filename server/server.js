@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
+const controller = require('./controller.js');
+
 app.get('/api/data', controller.getUndraftedPlayers, (req, res) => {
     // TODO: respond with the data from the undrafted players
     res.json({ message: 'Hello from Express!' });
