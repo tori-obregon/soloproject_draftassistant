@@ -3,11 +3,12 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-    mode: 'development',
-    entry: './src/app.jsx',
+    mode: process.env.NODE_ENV,
+    entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
+        // publicPath: '/'
     },
     module: {
         rules: [
@@ -51,7 +52,7 @@ module.exports = {
         // fallback to root for other urls
         historyApiFallback: true,
         static: {
-            directory: path.join(__dirname, './dist'),
+            directory: path.join(__dirname, './src'),
         },
         proxy: {
             '/api/**': {
