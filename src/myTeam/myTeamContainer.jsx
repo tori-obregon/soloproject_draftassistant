@@ -3,12 +3,11 @@ import MyPlayer from './myPlayer.jsx';
 
 export default function MyTeamContainer() {
   return (
-    <div id='myTeamContainer'>
-      <h1>myTeamContainer</h1>
+    <span id='myTeamContainer'>
       <MyPlayer />
       <MyPlayer />
       <MyPlayer />
-    </div>
+    </span>
     
   )
 }

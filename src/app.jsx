@@ -11,11 +11,14 @@ import PlayerSelectionPopUp from './playerSelectionPopUp.jsx';
 
 export default function App() {
   return (
-    <div>
-      <h1>this is the app</h1>
-      <button>RESET</button>
+    <div id='app'>
+      <button id='resetBtn'>RESET</button>
+      <h1>My Team</h1>
+      <h2>Overall</h2>
       <OverviewContainer />
+      <h2>My Players</h2>
       <MyTeamContainer />
+      <h1>Available Players</h1>
       <UndraftedContainer />  
       <PlayerSelectionPopUp />
     </div>
@@ -23,5 +26,5 @@ export default function App() {
   )
 }
 
-const root = createRoot(document.querySelector('#app'));
+const root = createRoot(document.querySelector('#root'));
 root.render(<App />,);
