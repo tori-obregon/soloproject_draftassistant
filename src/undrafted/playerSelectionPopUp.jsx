@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { addMyTeam } from '../redux/undraftedPlayersSlice.js';
 
@@ -9,14 +9,15 @@ export default function PlayerSelectionPopUp({ isVisible, togglePopUp, selectedP
 
   //states to handle when a player is selected or not
   const [selectedPlayerPlaceholder, setSelectedPlayerPlaceholder] = useState(selectedPlayer);
-  
-  if(!selectedPlayer) { //if a player is selected, then this should fire
-    setSelectedPlayerPlaceholder('mickey');
-  }
 
   //states to track the user input
   const [bid, setBid] = useState('');
   const [position, setPosition] = useState('');
+
+  useEffect(() => {
+    if(selectedPlayer) { //if a player is selected, then this should fire
+    setSelectedPlayerPlaceholder(selectedPlayer);
+  }}, [selectedPlayer]);
 
   //func to activate reducer
   const dispatch = useDispatch();
