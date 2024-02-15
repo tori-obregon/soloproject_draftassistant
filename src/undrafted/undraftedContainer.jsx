@@ -1,37 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchUndraftedPlayers } from '../redux/undraftedPlayersSlice.js';
+import PlayerSelectionPopUp from './playerSelectionPopUp.jsx';
 
 
 export default function UndraftedContainer() {
-  const undraftedPlayer = [
-    {
-      position: 'pg',
-      player: 'chris paul',
-      pts: 1,
-      reb: 2,
-      ast: 3,
-      blk: 4,
-      stl: 5,
-      fg : 6,
-      ft : 7,
-      threept : 8,
-      fantasy_score: 9,
-      suggested_bid : 10
-    },
-    {
-      position: 'pf',
-      player: 'steph curry',
-      pts: 1,
-      reb: 2,
-      ast: 3,
-      blk: 4,
-      stl: 5,
-      fg : 6,
-      ft : 7,
-      threept : 8,
-      fantasy_score: 9,
-      suggested_bid : 10
-    }
-  ];
+  const undraftedPlayers = useSelector((state) => state.undraftedPlayers.undraftedPlayers);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUndraftedPlayers());
+  }, [dispatch]);
+  
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const togglePopUp = () => setIsPopupVisible(!isPopupVisible); 
 
   return (
 
@@ -51,27 +33,28 @@ export default function UndraftedContainer() {
           <th>Fantasy Score</th>
           <th>$ Suggested Bid</th>
         </tr>
-        {undraftedPlayer.map((player) => {
+        {undraftedPlayers.map((player) => {
                     return (
                         <tr key={player.player}>
-                            <td>{player.position}</td>
+                            <td>{player.positions}</td>
                             <td>{player.player}</td>
                             <td>{player.pts}</td>
                             <td>{player.reb}</td>
                             <td>{player.ast}</td>
                             <td>{player.blk}</td>
                             <td>{player.stl}</td>
-                            <td>{player.fg}</td>
-                            <td>{player.ft}</td>
+                            <td>{player.fg_percentage}</td>
+                            <td>{player.ft_percentage}</td>
                             <td>{player.threept}</td>
-                            <td>{player.fantasy_score}</td>
+                            <td>{player.ftsy}</td>
                             <td>{player.suggested_bid}</td>
-                            <td><button>SELECT</button></td>
+                            <td><button id={player.player} onClick={togglePopUp}>SELECT</button></td>
                             <td><button>TAKEN</button></td>                          
                         </tr>
                     )
                 })}
       </table>
+      <PlayerSelectionPopUp isVisible={isPopupVisible} togglePopUp={togglePopUp} selectedPlayer={/>
     </div>
-  );
+  )
 }

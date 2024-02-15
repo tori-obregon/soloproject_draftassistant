@@ -1,7 +1,11 @@
 import React from 'react'
-import MyPlayer from './myPlayer.jsx';
+import { useSelector } from 'react-redux';
+import { fetchUndraftedPlayers } from '../redux/undraftedPlayersSlice.js';
+
 
 export default function MyTeamContainer() {
+//  const myTeam = useSelector((state) => state.undraftedPlayers.myTeam);
+
   return (
     <div id='myTeamContainer'>
       <table>
@@ -19,7 +23,24 @@ export default function MyTeamContainer() {
           <th>Fantasy Score</th>
           <th>$ Bid Price</th>
         </tr>
-        <MyPlayer />
+        {/* {myTeam.map((player) => {
+                    return (
+                        <tr key={player.player}>
+                            <td>[position input]</td>
+                            <td>{player.player}</td>
+                            <td>{player.pts}</td>
+                            <td>{player.reb}</td>
+                            <td>{player.ast}</td>
+                            <td>{player.blk}</td>
+                            <td>{player.stl}</td>
+                            <td>{player.fg_percentage}</td>
+                            <td>{player.ft_percentage}</td>
+                            <td>{player.threept}</td>
+                            <td>{player.ftsy}</td>
+                            <td>[paid price]</td>                         
+                        </tr>
+                    )
+                })} */}
       </table>
 
     </div>

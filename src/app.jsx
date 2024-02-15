@@ -6,7 +6,7 @@ import './style.scss';
 import UndraftedContainer from './undrafted/undraftedContainer.jsx';
 import MyTeamContainer from './myTeam/myTeamContainer.jsx';
 import OverviewContainer from './myTeam/overviewContainer.jsx';
-import PlayerSelectionPopUp from './playerSelectionPopUp.jsx';
+import PlayerSelectionPopUp from './undrafted/playerSelectionPopUp.jsx';
 
 
 export default function App() {

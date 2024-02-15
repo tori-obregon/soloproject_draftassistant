@@ -7,15 +7,19 @@
     "prod": "NODE_ENV=production node server/server.js",
     "build": "webpack",
     "dev": "NODE_ENV=development webpack serve --open",
-    "start": "concurrently \"cross-env NODE_ENV=development webpack serve --open\" \"cross-env NODE_ENV=development node server/server.js\"",
+    "start": "concurrently \"cross-env NODE_ENV=development webpack serve --open\" \"cross-env NODE_ENV=development nodemon server/server.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.1",
     "cross-env": "^7.0.3",
+    "pg": "^8.11.3",
+    "psql": "^0.0.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-redux": "^9.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",

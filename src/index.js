@@ -1,14 +1,19 @@
 import React from 'react';
-// import { render } from 'react-dom';
-import { createRoot } from 'react-dom/client';
+import { render } from 'react-dom';
+// import { createRoot } from 'react-dom/client';
 
-// import { BrowserRouter } from 'react-router-dom';
 import App from './app.jsx';
 
-// render(
-//     <App />,
-//   document.getElementById('root'),
-// );
+import { store } from './redux/store.js'
+import { Provider } from 'react-redux'
 
-const root = createRoot(document.querySelector('#root'));
-root.render(<App />,);
+render(
+    <Provider store={store}>
+        <App />
+    </Provider>
+    ,
+  document.getElementById('root'),
+);
+
+// const root = createRoot(document.querySelector('#root'));
+// root.render(<App />,);
