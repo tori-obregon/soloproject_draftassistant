@@ -10,22 +10,9 @@ export const fetchUndraftedPlayers = createAsyncThunk(
     }
 );
 
-
-
 const initialState = {
     undraftedPlayers: [],
-    myTeam: {
-        // PG: 'hi',
-        // SG,
-        // SF,
-        // PF,
-        // C,
-        // G,
-        // F,
-        // UTL,
-        // B,
-        // O
-    },
+    myTeam: {},
     Overall: {
         // PTS,
         // REB,
@@ -44,12 +31,35 @@ export const undraftedPlayersSlice = createSlice({
     name: 'undraftedPlayers',
     initialState,
     reducers: {
-        addMyTeam: (state) => {
+        addMyTeam: (state, action) => {
             //this should make state.undraftedPlayers into an array of objects of each player
-            const selectedPlayer; //should be the index of the object of the player selected
-            const userPosition; // should be the value of the user's input
-            const userBid; // should be the value of the user's input
-            const player = {
+            console.log('selectedPlayer', selectedPlayer);
+
+            const {bid, position, myPlayer} = action.payload;
+
+
+            //should be the index of the object of the player selected
+            function findPlayer() {
+                //variable to store found player
+                let foundPlayer = {myPlayer: 'Mickey Mouse'};
+                console.log('foundPlayer initial:', foundPlayer);
+                //iterate through array checking each object
+                state.undraftedPlayers.forEach((playerObj) => {
+                    //iterate through object values to see if it has the selected player
+                    //if found, assign to found player variable
+                    if(Object.values(playerObj).includes(myPlayer)) {
+                        foundPlayer = playerObj;
+                        console.log('foundPlayer', foundPlayer);
+                    }
+                }) 
+                
+                //return object with player information from undrafted players
+                return foundPlayer; 
+            }; 
+
+            const selectedPlayer = findPlayer();
+
+            const newPlayer = {
                 player: state.selectedPlayer.player,
                 pts: state.selectedPlayer.pts,
                 reb: state.selectedPlayer.reb,
@@ -60,10 +70,10 @@ export const undraftedPlayersSlice = createSlice({
                 ft_percentage: state.selectedPlayer.ft_percentage,
                 threept: state.selectedPlayer.threept,
                 ftsy: state.selectedPlayer.ftsy,
-                bid_price: userBid,
+                bid_price: bid,
             };
 
-            state.myTeam[userPosition] = player;
+            state.myTeam[position] = newPlayer;
         },
     },
     extraReducers: (builder) => {

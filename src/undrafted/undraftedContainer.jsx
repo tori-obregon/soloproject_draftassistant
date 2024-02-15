@@ -6,6 +6,7 @@ import PlayerSelectionPopUp from './playerSelectionPopUp.jsx';
 
 export default function UndraftedContainer() {
   const undraftedPlayers = useSelector((state) => state.undraftedPlayers.undraftedPlayers);
+  const [player, setPlayer] = useState('');
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -48,13 +49,13 @@ export default function UndraftedContainer() {
                             <td>{player.threept}</td>
                             <td>{player.ftsy}</td>
                             <td>{player.suggested_bid}</td>
-                            <td><button id={player.player} onClick={togglePopUp}>SELECT</button></td>
+                            <td><button id={player.player} onClick={() => {setPlayer(player.player);togglePopUp}}>SELECT</button></td>
                             <td><button>TAKEN</button></td>                          
                         </tr>
                     )
                 })}
       </table>
-      <PlayerSelectionPopUp isVisible={isPopupVisible} togglePopUp={togglePopUp} selectedPlayer={/>
+      <PlayerSelectionPopUp isVisible={isPopupVisible} togglePopUp={togglePopUp} selectedPlayer={player}/>
     </div>
   )
 }
