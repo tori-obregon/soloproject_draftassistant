@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { fetchUndraftedPlayers } from '../redux/undraftedPlayersSlice.js';
 
@@ -11,9 +11,16 @@ export default function MyTeamContainer() {
  const myTeam = useSelector((state) => state.undraftedPlayers.myTeam);
  console.log(myTeam);
 
+ const [myTeamCurr, setMyTeamCurr] = useState(myTeam);
+
+ useEffect(() => {
+  setMyTeamCurr(myTeam);
+ }, [myTeam]
+ )
+
  let rows;
 
-  if(Object.keys(myTeam).length == 0) {
+  if(Object.keys(myTeamCurr).length == 0) {
     console.log('myTeam is empty');
     rows = (
       <tr>
@@ -22,32 +29,30 @@ export default function MyTeamContainer() {
     )
   }
   else {
-    rows = myTeam.map((player) => {
-       (
-          <tr key={player.player}>
+    function populateRows() {
+      for(let position in myTeamCurr) { //iterate through each property in myTeam obj
+        return (
+          <tr key={position.player}>
               <td>[position input]</td>
-              <td>{player.player}</td>
-              <td>{player.pts}</td>
-              <td>{player.reb}</td>
-              <td>{player.ast}</td>
-              <td>{player.blk}</td>
-              <td>{player.stl}</td>
-              <td>{player.fg_percentage}</td>
-              <td>{player.ft_percentage}</td>
-              <td>{player.threept}</td>
-              <td>{player.ftsy}</td>
+              <td>{position.player}</td>
+              <td>{position.pts}</td>
+              <td>{position.reb}</td>
+              <td>{position.ast}</td>
+              <td>{position.blk}</td>
+              <td>{position.stl}</td>
+              <td>{position.fg_percentage}</td>
+              <td>{position.ft_percentage}</td>
+              <td>{position.threept}</td>
+              <td>{position.ftsy}</td>
               <td>[paid price]</td>                         
           </tr>
           )
-      })
+        }
+        console.log('rows populated');
+       }
+      
+      rows = populateRows();
     };
-
-
-//  useEffect(() => {
-//  //function that is activated when myTeam array is updated
-//  populateMyTeam();
-//  }, [myTeam]);
-
 
   return (
     <div id='myTeamContainer'>
@@ -69,6 +74,5 @@ export default function MyTeamContainer() {
         {rows}
       </table>
     </div>
-    
   )
 }

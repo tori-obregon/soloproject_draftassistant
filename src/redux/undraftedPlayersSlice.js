@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk, current } from '@reduxjs/toolkit'
 
 //fetch data to populate state
 export const fetchUndraftedPlayers = createAsyncThunk(
@@ -33,7 +33,6 @@ export const undraftedPlayersSlice = createSlice({
     reducers: {
         addMyTeam: (state, action) => {
             //this should make state.undraftedPlayers into an array of objects of each player
-            console.log('selectedPlayer', selectedPlayer);
 
             const {bid, position, myPlayer} = action.payload;
 
@@ -44,11 +43,13 @@ export const undraftedPlayersSlice = createSlice({
                 let foundPlayer = {myPlayer: 'Mickey Mouse'};
                 console.log('foundPlayer initial:', foundPlayer);
                 //iterate through array checking each object
-                state.undraftedPlayers.forEach((playerObj) => {
+                console.log('current(state.undraftedPlayers[0])', current(state.undraftedPlayers[0]));
+                current(state.undraftedPlayers).forEach((playerObj) => {
                     //iterate through object values to see if it has the selected player
                     //if found, assign to found player variable
+                    // console.log('playerObj', playerObj);
                     if(Object.values(playerObj).includes(myPlayer)) {
-                        foundPlayer = playerObj;
+                        foundPlayer = structuredClone(playerObj);
                         console.log('foundPlayer', foundPlayer);
                     }
                 }) 
@@ -58,22 +59,25 @@ export const undraftedPlayersSlice = createSlice({
             }; 
 
             const selectedPlayer = findPlayer();
+            console.log('selectedPlayer', selectedPlayer);
+
 
             const newPlayer = {
-                player: state.selectedPlayer.player,
-                pts: state.selectedPlayer.pts,
-                reb: state.selectedPlayer.reb,
-                ast: state.selectedPlayer.ast,
-                blk: state.selectedPlayer.blk,
-                stl: state.selectedPlayer.stl,
-                fg_percentage: state.selectedPlayer.fg_percentage,
-                ft_percentage: state.selectedPlayer.ft_percentage,
-                threept: state.selectedPlayer.threept,
-                ftsy: state.selectedPlayer.ftsy,
+                player: selectedPlayer.player,
+                pts: selectedPlayer.pts,
+                reb: selectedPlayer.reb,
+                ast: selectedPlayer.ast,
+                blk: selectedPlayer.blk,
+                stl: selectedPlayer.stl,
+                fg_percentage: selectedPlayer.fg_percentage,
+                ft_percentage: selectedPlayer.ft_percentage,
+                threept: selectedPlayer.threept,
+                ftsy: selectedPlayer.ftsy,
                 bid_price: bid,
             };
 
             state.myTeam[position] = newPlayer;
+            console.log('current(state.myTeam:)', current(state.myTeam));
         },
     },
     extraReducers: (builder) => {

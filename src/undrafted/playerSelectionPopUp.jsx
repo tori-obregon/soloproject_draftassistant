@@ -12,7 +12,7 @@ export default function PlayerSelectionPopUp({ isVisible, togglePopUp, selectedP
 
   //states to track the user input
   const [bid, setBid] = useState('');
-  const [position, setPosition] = useState('');
+  const [position, setPosition] = useState('pg');
 
   useEffect(() => {
     if(selectedPlayer) { //if a player is selected, then this should fire
