@@ -31,20 +31,21 @@ export default function MyTeamContainer() {
   else {
     function populateRows() {
       for(let position in myTeamCurr) { //iterate through each property in myTeam obj
+        console.log('myTeamCurr[position]', myTeamCurr[position]);
         return (
-          <tr key={position.player}>
-              <td>[position input]</td>
-              <td>{position.player}</td>
-              <td>{position.pts}</td>
-              <td>{position.reb}</td>
-              <td>{position.ast}</td>
-              <td>{position.blk}</td>
-              <td>{position.stl}</td>
-              <td>{position.fg_percentage}</td>
-              <td>{position.ft_percentage}</td>
-              <td>{position.threept}</td>
-              <td>{position.ftsy}</td>
-              <td>[paid price]</td>                         
+          <tr key={myTeamCurr[position].player}>
+              <td>{position}</td>
+              <td>{myTeamCurr[position].player}</td>
+              <td>{myTeamCurr[position].pts}</td>
+              <td>{myTeamCurr[position].reb}</td>
+              <td>{myTeamCurr[position].ast}</td>
+              <td>{myTeamCurr[position].blk}</td>
+              <td>{myTeamCurr[position].stl}</td>
+              <td>{myTeamCurr[position].fg_percentage}</td>
+              <td>{myTeamCurr[position].ft_percentage}</td>
+              <td>{myTeamCurr[position].threept}</td>
+              <td>{myTeamCurr[position].ftsy}</td>
+              <td>{myTeamCurr[position].bid_price}</td>                         
           </tr>
           )
         }
