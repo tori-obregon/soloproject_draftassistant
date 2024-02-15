@@ -8,18 +8,19 @@ export default function PlayerSelectionPopUp({ isVisible, togglePopUp, selectedP
   const visibilityStyle = {visibility: isVisible ? 'visible' : 'hidden'};
 
   //states to handle when a player is selected or not
-  const [selectedPlayerPlaceholder, setSelectedPlayerPlaceholder] = useState('mickey');
+  const [selectedPlayerPlaceholder, setSelectedPlayerPlaceholder] = useState(selectedPlayer);
+  
+  if(!selectedPlayer) { //if a player is selected, then this should fire
+    setSelectedPlayerPlaceholder('mickey');
+  }
 
   //states to track the user input
-  const [bid, setBid] = useState('1');
-  const [position, setPosition] = useState('disney');
+  const [bid, setBid] = useState('');
+  const [position, setPosition] = useState('');
 
   //func to activate reducer
   const dispatch = useDispatch();
-  const handleSubmit = () => {
-    if(selectedPlayer !== undefined) { //if a player is selected, then this should fire
-      setSelectedPlayerPlaceholder(selectedPlayer);
-    }
+  const handleSubmit = () => {  
     console.log('bid:', bid, 'position:', position, 'selectedPlayerPlaceholder:', selectedPlayerPlaceholder);
     dispatch(addMyTeam({bid: bid, position: position, myPlayer: selectedPlayerPlaceholder}));
     togglePopUp();
@@ -45,7 +46,7 @@ export default function PlayerSelectionPopUp({ isVisible, togglePopUp, selectedP
             <option value="b">Bench</option>
             <option value="o">Open</option>
         </select>
-        <button onClick={() => handleSubmit}>SUBMIT</button>
+        <button onClick={() => {console.log('submitBtn clicked');handleSubmit()}}>SUBMIT</button>
     </div>
   )
 }

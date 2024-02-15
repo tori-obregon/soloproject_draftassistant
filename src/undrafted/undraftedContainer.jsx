@@ -6,7 +6,7 @@ import PlayerSelectionPopUp from './playerSelectionPopUp.jsx';
 
 export default function UndraftedContainer() {
   const undraftedPlayers = useSelector((state) => state.undraftedPlayers.undraftedPlayers);
-  const [player, setPlayer] = useState('');
+  const [selectedPlayer, setSelectedPlayer] = useState('');
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,28 +34,28 @@ export default function UndraftedContainer() {
           <th>Fantasy Score</th>
           <th>$ Suggested Bid</th>
         </tr>
-        {undraftedPlayers.map((player) => {
+        {undraftedPlayers.map((thisPlayer) => {
                     return (
-                        <tr key={player.player}>
-                            <td>{player.positions}</td>
-                            <td>{player.player}</td>
-                            <td>{player.pts}</td>
-                            <td>{player.reb}</td>
-                            <td>{player.ast}</td>
-                            <td>{player.blk}</td>
-                            <td>{player.stl}</td>
-                            <td>{player.fg_percentage}</td>
-                            <td>{player.ft_percentage}</td>
-                            <td>{player.threept}</td>
-                            <td>{player.ftsy}</td>
-                            <td>{player.suggested_bid}</td>
-                            <td><button id={player.player} onClick={() => {setPlayer(player.player);togglePopUp}}>SELECT</button></td>
+                        <tr key={thisPlayer.player}>
+                            <td>{thisPlayer.positions}</td>
+                            <td>{thisPlayer.player}</td>
+                            <td>{thisPlayer.pts}</td>
+                            <td>{thisPlayer.reb}</td>
+                            <td>{thisPlayer.ast}</td>
+                            <td>{thisPlayer.blk}</td>
+                            <td>{thisPlayer.stl}</td>
+                            <td>{thisPlayer.fg_percentage}</td>
+                            <td>{thisPlayer.ft_percentage}</td>
+                            <td>{thisPlayer.threept}</td>
+                            <td>{thisPlayer.ftsy}</td>
+                            <td>{thisPlayer.suggested_bid}</td>
+                            <td><button id={thisPlayer.player} onClick={() => {setSelectedPlayer(thisPlayer.player);console.log('btn clicked', selectedPlayer);togglePopUp()}}>SELECT</button></td>
                             <td><button>TAKEN</button></td>                          
                         </tr>
                     )
                 })}
       </table>
-      <PlayerSelectionPopUp isVisible={isPopupVisible} togglePopUp={togglePopUp} selectedPlayer={player}/>
+      <PlayerSelectionPopUp isVisible={isPopupVisible} togglePopUp={togglePopUp} selectedPlayer={selectedPlayer}/>
     </div>
   )
 }
