@@ -7,19 +7,23 @@ const controller = require('./controller.js');
 
 // app.use('/dist', express.static(path.resolve(__dirname, '../dist')));
 
-app.use('/', (req,res) => {
-  console.log('root requested');
-  res.status(200).sendFile(path.join( __dirname, '../dist/index.html' ))
-});
+// app.use('/', (req,res) => {
+//   console.log('root requested');
+//   res.status(200).sendFile(path.join( __dirname, '../dist/index.html' ))
+// });
 
-app.use('/bundle.js', (req, res) => {
-  console.log('Request for bundle.js received')
-  res.sendFile(path.join(__dirname, '../dist/bundle.js'), {
-  });
-});
+// app.use('/bundle.js', (req, res) => {
+//   console.log('Request for bundle.js received')
+//   res.sendFile(path.join(__dirname, '../dist/bundle.js'), {
+//   });
+// });
 
 
+app.use('/bundle.js', express.static(path.join(__dirname, '../dist/bundle.js')));
 
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
+})
 
 app.get('/api/data', controller.getUndraftedPlayers, (req, res) => {
     // TODO: respond with the data from the undrafted players
