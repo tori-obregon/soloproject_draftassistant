@@ -30,29 +30,32 @@ export default function MyTeamContainer() {
   }
   else {
     function populateRows() {
-      for(let position in myTeamCurr) { //iterate through each property in myTeam obj
-        console.log('myTeamCurr[position]', myTeamCurr[position]);
-        return (
-          <tr key={myTeamCurr[position].player}>
+      return Object.entries(myTeamCurr).map(([position, playerDetails]) => {
+        console.log('position:', position, 'playerDetails', playerDetails);
+        console.log('playerDetails', playerDetails.player);
+           return (
+          <tr key={playerDetails.player}>
               <td>{position}</td>
-              <td>{myTeamCurr[position].player}</td>
-              <td>{myTeamCurr[position].pts}</td>
-              <td>{myTeamCurr[position].reb}</td>
-              <td>{myTeamCurr[position].ast}</td>
-              <td>{myTeamCurr[position].blk}</td>
-              <td>{myTeamCurr[position].stl}</td>
-              <td>{myTeamCurr[position].fg_percentage}</td>
-              <td>{myTeamCurr[position].ft_percentage}</td>
-              <td>{myTeamCurr[position].threept}</td>
-              <td>{myTeamCurr[position].ftsy}</td>
-              <td>{myTeamCurr[position].bid_price}</td>                         
+              <td>{playerDetails.player}</td>
+              <td>{playerDetails.pts}</td>
+              <td>{playerDetails.reb}</td>
+              <td>{playerDetails.ast}</td>
+              <td>{playerDetails.blk}</td>
+              <td>{playerDetails.stl}</td>
+              <td>{playerDetails.fg_percentage}</td>
+              <td>{playerDetails.ft_percentage}</td>
+              <td>{playerDetails.threept}</td>
+              <td>{playerDetails.ftsy}</td>
+              <td>{playerDetails.bid_price}</td>                         
           </tr>
           )
-        }
+      })
+
         console.log('rows populated');
        }
       
       rows = populateRows();
+      console.log('rows',rows);
     };
 
   return (
