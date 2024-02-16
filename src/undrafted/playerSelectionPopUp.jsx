@@ -29,25 +29,25 @@ export default function PlayerSelectionPopUp({ isVisible, togglePopUp, selectedP
 
   return (
     <div id='playerSelectionPopUp' style={visibilityStyle}>
-        <h1>PlayerSelectionPopUp</h1>
         <button id='closePopUpBtn' onClick={togglePopUp}>X</button> 
+        <h1>PlayerSelectionPopUp</h1>
         <h3>{selectedPlayerPlaceholder}</h3>
-        <label>How much did you pay?</label>
+        <label>How much did you bid?</label>
         <input type='text' placeholder='$1' onChange={(input) => setBid(input.target.value)}></input>
         <label>Choose a Position</label>
         <select id="positin" name="Select a position" onChange={(input) => setPosition(input.target.value)} >
-            <option value="pg">Point Guard</option>
-            <option value="sg">Shooting Guard</option>
-            <option value="sf">Small Forward</option>
-            <option value="pf">Power Forward</option>
-            <option value="c">Center</option>
-            <option value="g">Guard</option>
-            <option value="f">Forward</option>
-            <option value="utl">Utility</option>
-            <option value="b">Bench</option>
-            <option value="o">Open</option>
+            <option value="Point Guard">Point Guard</option>
+            <option value="Shooting Guard">Shooting Guard</option>
+            <option value="Small Forward">Small Forward</option>
+            <option value="Power Forward">Power Forward</option>
+            <option value="Center">Center</option>
+            <option value="Guard">Guard</option>
+            <option value="Forward">Forward</option>
+            <option value="Utility">Utility</option>
+            <option value="Bench">Bench</option>
+            <option value="Open">Open</option>
         </select>
-        <button onClick={() => {console.log('submitBtn clicked');handleSubmit()}}>SUBMIT</button>
+        <button id='submitBtn' onClick={() => {console.log('submitBtn clicked');handleSubmit()}}>SUBMIT</button>
     </div>
   )
 }
