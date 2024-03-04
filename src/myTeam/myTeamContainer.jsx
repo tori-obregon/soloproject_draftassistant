@@ -9,7 +9,7 @@ export default function MyTeamContainer() {
 
 
  const myTeam = useSelector((state) => state.undraftedPlayers.myTeam);
- console.log(myTeam);
+//  console.log(myTeam);
 
  const [myTeamCurr, setMyTeamCurr] = useState(myTeam);
 
@@ -31,8 +31,8 @@ export default function MyTeamContainer() {
   else {
     function populateRows() {
       return Object.entries(myTeamCurr).map(([position, playerDetails]) => {
-        console.log('position:', position, 'playerDetails', playerDetails);
-        console.log('playerDetails', playerDetails.player);
+        // console.log('position:', position, 'playerDetails', playerDetails);
+        // console.log('playerDetails', playerDetails.player);
            return (
           <tr key={playerDetails.player}>
               <td>{position}</td>

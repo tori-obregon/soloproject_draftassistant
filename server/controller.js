@@ -13,7 +13,7 @@ controller.getUndraftedPlayers = (req, res, next) => {
     db.query(stringSQL)
         .then((result) => {
             res.locals.players = result.rows;
-            console.log('res.locals.players', res.locals.players);
+            // console.log('res.locals.players', res.locals.players);
             return next();
         })
         .catch((error) => {
