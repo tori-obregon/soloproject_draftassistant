@@ -8,8 +8,6 @@ export default function OverviewContainer() {
   const [ strongCat, setStrongCat ] = useAtom(strongCategoriesAtom);
   const [myTeamCurr, setMyTeamCurr] = useState(myTeam);
 
-
-
   useEffect(() => {
     setMyTeamCurr(myTeam);
    }, [myTeam]
@@ -18,7 +16,6 @@ export default function OverviewContainer() {
   let rows;
 
   if(Object.keys(myTeamCurr).length == 0) {
-    console.log('myTeamCurr is empty');
     rows = (
       <tr>
       <td>{strongCat}</td>
@@ -42,12 +39,14 @@ export default function OverviewContainer() {
       let averages = {};
       //function to iterate through myTeam for the values, 
       Object.entries(myTeamCurr).map((currplayer) => {
-        console.log('currplayer', currplayer);
         //and pull the category values and add them to averages obj
         for(const category in currplayer[1]) {
           if(category in averages) {
             //and find the average per category
-            averages[category] = (averages[category] + parseFloat(currplayer[1][category])) / Object.entries(myTeamCurr).length;
+            const categoryAvg = (averages[category] + parseFloat(currplayer[1][category])) / Object.entries(myTeamCurr).length;
+            const twoDecimalAvg = Math.round(categoryAvg * 100) / 100;
+            averages[category] = twoDecimalAvg;
+
           }
           else {
             averages[category] = parseFloat(currplayer[1][category]);
@@ -61,7 +60,6 @@ export default function OverviewContainer() {
           return result;
         }
         averages = omit(averages, 'player', 'bid_price');
-        console.log('averages', averages);
       })
         return (
           <tr>

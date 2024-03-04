@@ -47,7 +47,7 @@ export default function PlayerSelectionPopUp({ isVisible, togglePopUp, selectedP
             <option value="Bench">Bench</option>
             <option value="Open">Open</option>
         </select>
-        <button id='submitBtn' onClick={() => {console.log('submitBtn clicked');handleSubmit()}}>SUBMIT</button>
+        <button id='submitBtn' onClick={() => handleSubmit()}>SUBMIT</button>
     </div>
   )
 }

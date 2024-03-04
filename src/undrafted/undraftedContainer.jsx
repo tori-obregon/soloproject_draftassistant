@@ -49,7 +49,7 @@ export default function UndraftedContainer() {
                             <td>{thisPlayer.threept}</td>
                             <td>{thisPlayer.ftsy}</td>
                             <td>{thisPlayer.suggested_bid}</td>
-                            <td><button className='selectBtn' id={thisPlayer.player} onClick={() => {setSelectedPlayer(thisPlayer.player);console.log('btn clicked', selectedPlayer);togglePopUp()}}>SELECT</button></td>
+                            <td><button className='selectBtn' id={thisPlayer.player} onClick={() => {setSelectedPlayer(thisPlayer.player);togglePopUp()}}>SELECT</button></td>
                             <td><button className='takenBtn'>TAKEN</button></td>                          
                         </tr>
                     )
