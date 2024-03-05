@@ -8,6 +8,9 @@ export default function OverviewContainer() {
   const [ strongCat, setStrongCat ] = useAtom(strongCategoriesAtom);
   const [myTeamCurr, setMyTeamCurr] = useState(myTeam);
 
+  const [count, setCount] = useAtom(testAtom);
+  const inc = () => setCount((c) => c + 1);
+
   useEffect(() => {
     setMyTeamCurr(myTeam);
    }, [myTeam]
@@ -84,6 +87,11 @@ export default function OverviewContainer() {
 
   return (
     <div id='overviewContainer'>
+      <div>
+        <h1>Counter</h1>
+        <h2>{count}</h2>
+        <button onClick={inc}>+1</button>
+      </div>
       <table>
         <tr>
           <th># Strong Categories</th>
