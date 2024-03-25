@@ -22,7 +22,7 @@ export default function PlayerSelectionPopUp({ isVisible, togglePopUp, selectedP
   //func to activate reducer
   const dispatch = useDispatch();
   const handleSubmit = () => {  
-    console.log('bid:', bid, 'position:', position, 'selectedPlayerPlaceholder:', selectedPlayerPlaceholder);
+    // console.log('bid:', bid, 'position:', position, 'selectedPlayerPlaceholder:', selectedPlayerPlaceholder);
     dispatch(addMyTeam({bid: bid, position: position, myPlayer: selectedPlayerPlaceholder}));
     togglePopUp();
     }
@@ -47,7 +47,7 @@ export default function PlayerSelectionPopUp({ isVisible, togglePopUp, selectedP
             <option value="Bench">Bench</option>
             <option value="Open">Open</option>
         </select>
-        <button id='submitBtn' onClick={() => {console.log('submitBtn clicked');handleSubmit()}}>SUBMIT</button>
+        <button id='submitBtn' onClick={() => handleSubmit()}>SUBMIT</button>
     </div>
   )
 }

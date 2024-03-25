@@ -9,7 +9,6 @@ export default function MyTeamContainer() {
 
 
  const myTeam = useSelector((state) => state.undraftedPlayers.myTeam);
- console.log(myTeam);
 
  const [myTeamCurr, setMyTeamCurr] = useState(myTeam);
 
@@ -21,7 +20,6 @@ export default function MyTeamContainer() {
  let rows;
 
   if(Object.keys(myTeamCurr).length == 0) {
-    console.log('myTeam is empty');
     rows = (
       <tr>
         <td>No Players Added</td>
@@ -31,8 +29,6 @@ export default function MyTeamContainer() {
   else {
     function populateRows() {
       return Object.entries(myTeamCurr).map(([position, playerDetails]) => {
-        console.log('position:', position, 'playerDetails', playerDetails);
-        console.log('playerDetails', playerDetails.player);
            return (
           <tr key={playerDetails.player}>
               <td>{position}</td>
@@ -50,12 +46,8 @@ export default function MyTeamContainer() {
           </tr>
           )
       })
-
-        console.log('rows populated');
        }
-      
       rows = populateRows();
-      console.log('rows',rows);
     };
 
   return (

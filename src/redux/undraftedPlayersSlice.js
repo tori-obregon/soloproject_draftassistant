@@ -41,16 +41,12 @@ export const undraftedPlayersSlice = createSlice({
             function findPlayer() {
                 //variable to store found player
                 let foundPlayer = {myPlayer: 'Mickey Mouse'};
-                console.log('foundPlayer initial:', foundPlayer);
                 //iterate through array checking each object
-                console.log('current(state.undraftedPlayers[0])', current(state.undraftedPlayers[0]));
                 current(state.undraftedPlayers).forEach((playerObj) => {
                     //iterate through object values to see if it has the selected player
                     //if found, assign to found player variable
-                    // console.log('playerObj', playerObj);
                     if(Object.values(playerObj).includes(myPlayer)) {
                         foundPlayer = structuredClone(playerObj);
-                        console.log('foundPlayer', foundPlayer);
                     }
                 }) 
                 
@@ -59,7 +55,6 @@ export const undraftedPlayersSlice = createSlice({
             }; 
 
             const selectedPlayer = findPlayer();
-            console.log('selectedPlayer', selectedPlayer);
 
 
             const newPlayer = {
@@ -77,7 +72,6 @@ export const undraftedPlayersSlice = createSlice({
             };
 
             state.myTeam[position] = newPlayer;
-            console.log('current(state.myTeam:)', current(state.myTeam));
         },
     },
     extraReducers: (builder) => {
