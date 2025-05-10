@@ -1,66 +1,83 @@
-import React, { useState, useEffect } from "react";
-// import { useDispatch } from 'react-redux';
-// import { addMyTeam } from '../redux/undraftedPlayersSlice.js';
+import { useEffect, useState } from "react";
+import { useDraftStore } from "~/stores/useDraftStore";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "~/components/ui/dialog";
+import { Input } from "~/components/ui/input";
+import { Label } from "~/components/ui/label";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "~/components/ui/select";
+import { Button } from "~/components/ui/button";
 
-export default function PlayerSelectionPopUp({
-  isVisible,
-  togglePopUp,
-  selectedPlayer,
-}: {
+interface PlayerSelectionPopUpProps {
   isVisible: boolean;
   togglePopUp: () => void;
-  selectedPlayer: any;
-}) {
-  const visibilityStyle = { visibility: isVisible ? "visible" : "hidden" };
+  selectedPlayer: string;
+}
 
-  //states to handle when a player is selected or not
-  const [selectedPlayerPlaceholder, setSelectedPlayerPlaceholder] = useState(selectedPlayer);
+export default function PlayerSelectionPopUp({ isVisible, togglePopUp, selectedPlayer }: PlayerSelectionPopUpProps) {
+  const addMyTeam = useDraftStore((state) => state.addMyTeam);
 
-  //states to track the user input
   const [bid, setBid] = useState("");
-  const [position, setPosition] = useState("pg");
+  const [position, setPosition] = useState("Point Guard");
+  const [selectedPlayerPlaceholder, setSelectedPlayerPlaceholder] = useState(selectedPlayer);
 
   useEffect(() => {
     if (selectedPlayer) {
-      //if a player is selected, then this should fire
       setSelectedPlayerPlaceholder(selectedPlayer);
     }
   }, [selectedPlayer]);
 
-  //func to activate reducer
-  // const dispatch = useDispatch();
   const handleSubmit = () => {
-    // console.log('bid:', bid, 'position:', position, 'selectedPlayerPlaceholder:', selectedPlayerPlaceholder);
-    // dispatch(addMyTeam({bid: bid, position: position, myPlayer: selectedPlayerPlaceholder}));
-    // togglePopUp();
-    console.log("submitted");
+    addMyTeam(Number(bid), position, selectedPlayerPlaceholder);
+    togglePopUp();
   };
 
   return (
-    <div id='playerSelectionPopUp'>
-      <button id='closePopUpBtn' onClick={togglePopUp}>
-        X
-      </button>
-      <h1>PlayerSelectionPopUp</h1>
-      <h3>{selectedPlayerPlaceholder}</h3>
-      <label>How much did you bid?</label>
-      <input type='text' placeholder='$1' onChange={(input) => setBid(input.target.value)}></input>
-      <label>Choose a Position</label>
-      <select id='positin' name='Select a position' onChange={(input) => setPosition(input.target.value)}>
-        <option value='Point Guard'>Point Guard</option>
-        <option value='Shooting Guard'>Shooting Guard</option>
-        <option value='Small Forward'>Small Forward</option>
-        <option value='Power Forward'>Power Forward</option>
-        <option value='Center'>Center</option>
-        <option value='Guard'>Guard</option>
-        <option value='Forward'>Forward</option>
-        <option value='Utility'>Utility</option>
-        <option value='Bench'>Bench</option>
-        <option value='Open'>Open</option>
-      </select>
-      <button id='submitBtn' onClick={() => handleSubmit()}>
-        SUBMIT
-      </button>
-    </div>
+    <Dialog open={isVisible} onOpenChange={togglePopUp}>
+      <DialogContent className='sm:max-w-md'>
+        <DialogHeader>
+          <DialogTitle className='text-lg'>Select Player</DialogTitle>
+        </DialogHeader>
+        <div className='space-y-4'>
+          <div>
+            <p className='font-semibold'>{selectedPlayerPlaceholder}</p>
+          </div>
+
+          <div className='space-y-2'>
+            <Label htmlFor='bid'>How much did you bid?</Label>
+            <Input id='bid' type='number' placeholder='$1' value={bid} onChange={(e) => setBid(e.target.value)} />
+          </div>
+
+          <div className='space-y-2'>
+            <Label htmlFor='position'>Choose a Position</Label>
+            <Select value={position} onValueChange={(val) => setPosition(val)}>
+              <SelectTrigger id='position'>
+                <SelectValue placeholder='Select a position' />
+              </SelectTrigger>
+              <SelectContent>
+                {[
+                  "Point Guard",
+                  "Shooting Guard",
+                  "Small Forward",
+                  "Power Forward",
+                  "Center",
+                  "Guard",
+                  "Forward",
+                  "Utility",
+                  "Bench",
+                  "Open",
+                ].map((pos) => (
+                  <SelectItem key={pos} value={pos}>
+                    {pos}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <Button onClick={handleSubmit} className='w-full'>
+            Submit
+          </Button>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }
