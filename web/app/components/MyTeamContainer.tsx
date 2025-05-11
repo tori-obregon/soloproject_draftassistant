@@ -1,71 +1,56 @@
-import React, { useEffect, useState } from "react";
-// import { useSelector } from 'react-redux';
-// import { fetchUndraftedPlayers } from '../redux/undraftedPlayersSlice.js';
+import { useDraftStore } from "~/stores/useDraftStore";
+import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "~/components/ui/table";
 
 export default function MyTeamContainer() {
-  //if myTeam is empty, then render a single <td> that has "no players added"
-  //if myTeam is not empty, then render rows using .map
-
-  //  const myTeam = useSelector((state) => state.undraftedPlayers.myTeam);
-
-  const [myTeamCurr, setMyTeamCurr] = useState("myTeam");
-
-  //  useEffect(() => {
-  //   setMyTeamCurr(myTeam);
-  //  }, [myTeam]
-  //  )
-
-  let rows;
-
-  // if (Object.keys(myTeamCurr).length == 0) {
-  //   rows = (
-  //     <tr>
-  //       <td>No Players Added</td>
-  //     </tr>
-  //   );
-  // } else {
-  //   function populateRows() {
-  //     return Object.entries(myTeamCurr).map(([position, playerDetails]) => {
-  //       return (
-  //         <tr key={playerDetails.player}>
-  //           <td>{position}</td>
-  //           <td>{playerDetails.player}</td>
-  //           <td>{playerDetails.pts}</td>
-  //           <td>{playerDetails.reb}</td>
-  //           <td>{playerDetails.ast}</td>
-  //           <td>{playerDetails.blk}</td>
-  //           <td>{playerDetails.stl}</td>
-  //           <td>{playerDetails.fg_percentage}</td>
-  //           <td>{playerDetails.ft_percentage}</td>
-  //           <td>{playerDetails.threept}</td>
-  //           <td>{playerDetails.ftsy}</td>
-  //           <td>{playerDetails.bid_price}</td>
-  //         </tr>
-  //       );
-  //     });
-  //   }
-  //   rows = populateRows();
-  // }
+  const myTeam = useDraftStore((state) => state.myTeam);
+  const entries = Object.entries(myTeam);
 
   return (
-    <div id='myTeamContainer'>
-      <table>
-        <tr>
-          <th>Position</th>
-          <th>Player</th>
-          <th>PTS</th>
-          <th>REB</th>
-          <th>AST</th>
-          <th>BLK</th>
-          <th>STL</th>
-          <th>FG%</th>
-          <th>FT%</th>
-          <th>3PT</th>
-          <th>Fantasy Score</th>
-          <th>$ Bid Price</th>
-        </tr>
-        {/* {rows} */}
-      </table>
+    <div id='myTeamContainer' className='p-4'>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Position</TableHead>
+            <TableHead>Player</TableHead>
+            <TableHead>PTS</TableHead>
+            <TableHead>REB</TableHead>
+            <TableHead>AST</TableHead>
+            <TableHead>BLK</TableHead>
+            <TableHead>STL</TableHead>
+            <TableHead>FG%</TableHead>
+            <TableHead>FT%</TableHead>
+            <TableHead>3PT</TableHead>
+            <TableHead>Fantasy Score</TableHead>
+            <TableHead>$ Bid Price</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {entries.length === 0 ? (
+            <TableRow>
+              <TableCell colSpan={12} className='text-center italic'>
+                No Players Added
+              </TableCell>
+            </TableRow>
+          ) : (
+            entries.map(([position, player]) => (
+              <TableRow key={player.player}>
+                <TableCell>{position}</TableCell>
+                <TableCell>{player.player}</TableCell>
+                <TableCell>{player.pts}</TableCell>
+                <TableCell>{player.reb}</TableCell>
+                <TableCell>{player.ast}</TableCell>
+                <TableCell>{player.blk}</TableCell>
+                <TableCell>{player.stl}</TableCell>
+                <TableCell>{player.fg_percentage}</TableCell>
+                <TableCell>{player.ft_percentage}</TableCell>
+                <TableCell>{player.threept}</TableCell>
+                <TableCell>{player.ftsy}</TableCell>
+                <TableCell>{player.bid_price}</TableCell>
+              </TableRow>
+            ))
+          )}
+        </TableBody>
+      </Table>
     </div>
   );
 }

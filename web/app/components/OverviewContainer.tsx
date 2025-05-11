@@ -1,18 +1,19 @@
 import React, { useMemo } from "react";
-import { useDraftStore } from "../stores/useDraftStore"; // update path as needed
+import { useDraftStore } from "../stores/useDraftStore";
+import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "~/components/ui/table";
 
 export default function OverviewContainer() {
   const myTeam = useDraftStore((state) => state.myTeam);
 
-  const rows = useMemo(() => {
+  const row = useMemo(() => {
     const teamEntries = Object.entries(myTeam);
     if (teamEntries.length === 0) {
       return (
-        <tr>
+        <TableRow>
           {Array.from({ length: 11 }).map((_, i) => (
-            <td key={i}>[average]</td>
+            <TableCell key={i}>[average]</TableCell>
           ))}
-        </tr>
+        </TableRow>
       );
     }
 
@@ -34,42 +35,42 @@ export default function OverviewContainer() {
     const totalSpent = teamEntries.reduce((acc, [_, p]) => acc + (p.bid_price || 0), 0);
 
     return (
-      <tr>
-        <td>[# strong categories]</td>
-        <td>{averages.pts}</td>
-        <td>{averages.reb}</td>
-        <td>{averages.ast}</td>
-        <td>{averages.blk}</td>
-        <td>{averages.stl}</td>
-        <td>{averages.fg_percentage}</td>
-        <td>{averages.ft_percentage}</td>
-        <td>{averages.threept}</td>
-        <td>{averages.ftsy}</td>
-        <td>{totalSpent}</td>
-      </tr>
+      <TableRow>
+        <TableCell>[# strong categories]</TableCell>
+        <TableCell>{averages.pts}</TableCell>
+        <TableCell>{averages.reb}</TableCell>
+        <TableCell>{averages.ast}</TableCell>
+        <TableCell>{averages.blk}</TableCell>
+        <TableCell>{averages.stl}</TableCell>
+        <TableCell>{averages.fg_percentage}</TableCell>
+        <TableCell>{averages.ft_percentage}</TableCell>
+        <TableCell>{averages.threept}</TableCell>
+        <TableCell>{averages.ftsy}</TableCell>
+        <TableCell>{totalSpent}</TableCell>
+      </TableRow>
     );
   }, [myTeam]);
 
   return (
-    <div id='overviewContainer'>
-      <table>
-        <thead>
-          <tr>
-            <th># Strong Categories</th>
-            <th>AVG PTS</th>
-            <th>AVG REB</th>
-            <th>AVG AST</th>
-            <th>AVG BLK</th>
-            <th>AVG STL</th>
-            <th>AVG FG%</th>
-            <th>AVG FT%</th>
-            <th>AVG 3PT</th>
-            <th>AVG Fantasy Score</th>
-            <th>$ Total Spent</th>
-          </tr>
-        </thead>
-        <tbody>{rows}</tbody>
-      </table>
+    <div id='overviewContainer' className='p-4'>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead># Strong Categories</TableHead>
+            <TableHead>AVG PTS</TableHead>
+            <TableHead>AVG REB</TableHead>
+            <TableHead>AVG AST</TableHead>
+            <TableHead>AVG BLK</TableHead>
+            <TableHead>AVG STL</TableHead>
+            <TableHead>AVG FG%</TableHead>
+            <TableHead>AVG FT%</TableHead>
+            <TableHead>AVG 3PT</TableHead>
+            <TableHead>AVG Fantasy Score</TableHead>
+            <TableHead>$ Total Spent</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>{row}</TableBody>
+      </Table>
     </div>
   );
 }

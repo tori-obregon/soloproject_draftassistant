@@ -13,6 +13,8 @@ interface Player {
   ft_percentage: number;
   threept: number;
   ftsy: number;
+  positions?: Array<string>;
+  suggested_bid?: string;
 }
 
 interface TeamPlayer extends Player {
